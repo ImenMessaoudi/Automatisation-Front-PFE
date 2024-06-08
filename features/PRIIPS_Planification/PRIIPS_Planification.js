@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@cucumber/cucumber")
 const expect = require("chai").expect
-const component = require("../../support/components.js")
+const component = require("../support/components")
 const fs = require("fs")
 const path = require("path")
 const downloadPath = path.resolve("./Downloads")
@@ -63,7 +63,9 @@ const selectWorkflow = async () => {
   await checkbox.click()
 }
 const clickRunButton = async () => {
-  await page.click('button[tt="Valider"]')
+  let createButton =  await  page.waitForSelector('.select_action')
+  await page.click(createButton)
+  //await page.click('button[tt="Valider"]')
 }
 
 const clickExportButton = async () => {
@@ -205,6 +207,7 @@ const selectFrequency = async (Frequency) => {
   }, Frequency)
 }
 
+
 const selectProductionStart = async (ProductionStart) => {
   await page.waitForSelector("input[type=date]")
 
@@ -242,10 +245,10 @@ const spreadSheetVerification = async () => {
 }
 const clickClearButton = async () => {
   const buttons = await page.$$("button")
-  const saveButton = buttons[2]
+  const clearButton = buttons[3]
 
   if (saveButton) {
-    await saveButton.click()
+    await clearButton.click()
   }
 }
 const verifyFormAfterClearAction = async () => {

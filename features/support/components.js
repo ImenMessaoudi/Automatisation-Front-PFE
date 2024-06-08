@@ -436,12 +436,14 @@ var skipButton = async () => {
     }
   }
 }
-
+// 
 var elementIsVisible = async (elm) => {
   let isVisible = await page.evaluate((elm) => {
     if (!elm) return false
+    //Recuperer  tous les  propriete CSS 
     const style = getComputedStyle(elm)
-    return style.display !== "none"
+    return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    //return style.display !== "none"
   }, elm)
   if (!isVisible) {
     throw " Element is not displayed"

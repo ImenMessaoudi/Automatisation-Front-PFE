@@ -12,21 +12,21 @@ Feature: Follow-up Screen : User Panel Info
              Then All the menus <Allmenus> are displayed
      
         Examples:
-                  | user           | password | Allmenus                      |
-                  | IMP_AUTOMATION | Neoxam23 | link-logout;link-powered;lang |
+                  | user           | password        | Allmenus                      |
+                  | imen.messaoudi | NeoxamMess@2424 | link-logout;link-powered;lang |
 
 
         @IMPRESS-9745
         Scenario Outline: Test Abor
 
             Given I am logged in with <user> and <password>
-             When  I select the preference menu in the left menu
-              And I click in the Abor menu
-             Then JNLP file is Downloaded
+            When  I select the preference menu in the left menu
+            And I click in the Abor menu
+            Then JNLP file is Downloaded
 
         Examples:
-                  | user           | password |
-                  | IMP_AUTOMATION | Neoxam23 |
+                  | user           | password        |
+                  | imen.messaoudi | NeoxamMess@2424 |
 
 
         @IMPRESS-9747
@@ -38,9 +38,9 @@ Feature: Follow-up Screen : User Panel Info
              Then  The language of the menus <menus> is changed
  
         Examples:
-                  | user           | password | languageButton | menus                 |
-                  | IMP_AUTOMATION | Neoxam23 | FR             | Suivi;Tableau de bord |
-                  | IMP_AUTOMATION | Neoxam23 | EN             | Follow-up;Dashboard   |
+                  | user           | password        | languageButton | menus                 |
+                  | imen.messaoudi | NeoxamMess@2424 | FR             | Suivi;Tableau de bord |
+                  | imen.messaoudi | NeoxamMess@2424 | EN             | Follow-up;Dashboard   |
     
 
 
@@ -54,7 +54,7 @@ Feature: Follow-up Screen : User Panel Info
              Then I should be logged out
 
         Examples:
-                  | user           | password |
-                  | IMP_AUTOMATION | Neoxam23 |
+                  | user           | password        |
+                  | imen.messaoudi | NeoxamMess@2424 |
     
 
