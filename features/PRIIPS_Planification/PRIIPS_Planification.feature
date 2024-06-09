@@ -18,7 +18,7 @@
      
         Examples:
                   | user            | password         | screen        | criteria                   | values                          | 
-                  | imen.messaoudi  |NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence | 2022-02-07;2024-12-26;en;|  
+                  | imen.messaoudi  |NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence | 2022-02-07;2024-12-26;en;MONTHLY|  
 
 
       @IMPRESS-15443
@@ -50,7 +50,7 @@
              And I Pick the jurisdiction <Jurisdiction> 
              And I pick a language <Languages> from the displayed languages
              And I select toggle switch action <SwitchAction>
-             #And I choose a frequency <Frequency> 
+             And I select a frequency <Frequency> 
              And I choose production start <ProductionStart> 
              And I select the production end <ProductionEnd>
              And I click on the save button

@@ -245,9 +245,10 @@ const spreadSheetVerification = async () => {
 }
 const clickClearButton = async () => {
   const buttons = await page.$$("button")
+  //le clear buton est  dans  la  liste d'ordre 3 
   const clearButton = buttons[3]
 
-  if (saveButton) {
+  if (clearButton) {
     await clearButton.click()
   }
 }
@@ -383,7 +384,7 @@ When("I pick a language {} from the displayed languages", async (Languages) => {
 When("I select toggle switch action {}", async (SwitchAction) => {
   await selectSwitchAction(SwitchAction)
 })
-When("I choose a frequency {}", async (Frequency) => {
+When("I select a frequency {}", async (Frequency) => {
   await selectFrequency(Frequency)
 })
 When("I choose production start {}", async (ProductionStart) => {
