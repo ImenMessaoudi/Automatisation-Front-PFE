@@ -28,16 +28,20 @@ const displayMenus = async (Allmenus) => {
     }
     },selector,i)}
 }
-
+// Problem  de telechargement  de fichier;  il faut  crie une session CDP 
  const clickAbor = async () => { 
 
   await page.waitForSelector('.user-menu.retract > a[href]', { waitUntil: 'networkidle2' })
       await page.click('.user-menu.retract > a[href]')
-      await page._client.send('Page.setDownloadBehavior', {   
-           behavior: 'allow',
-           downloadPath: downloadPath 
-       });    
+      const client = await page.target().createCDPSession();
+      await client.send('Page.setDownloadBehavior', {
+        behavior: 'allow',
+        downloadPath: downloadPath
+      });  
 }
+
+
+
 
  const fileDownloded = async () => {    
    function escapeRegex(string) {
