@@ -95,8 +95,8 @@
 
      
         Examples:
-                  | user            | password    | screen        | criteria                   | values                           | 
-                  | abir.khabthani  |             | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |  
+                  | user            | password        | screen        | criteria                   | values                           | 
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |  
 
 
       @IMPRESS-15447
