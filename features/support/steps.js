@@ -15,8 +15,8 @@ Before(async function (scenario) {
   scenarioName = scenario.pickle.name
   this.attach(new Date().toISOString())
 
-  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html"
 
+  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html"
   await page.goto(path)
   //Connexion SSH 
   const sshConnection = await connectSSH()
@@ -69,12 +69,17 @@ global.login = async (user, password) => {
   await loginForm.evaluate((form) => form.submit())
  
   try {
+    
     await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
+    await page.goto("https://refprod-priips-test.bams.corp/impress/digital/index.html", { waitUntil: 'networkidle0' });
   } catch (error) {
     logger.error("Login failure");
     throw "Login Failure!";
   }
-  await page.waitForSelector('.search-wrapper', { timeout: 60000 })
+
+  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html#/?dashboard_filters=off&grouping=umbrella"
+  await page.goto(path)
+  await page.waitForSelector('.search-wrapper', { timeout: 120000 })
 
  
 };
