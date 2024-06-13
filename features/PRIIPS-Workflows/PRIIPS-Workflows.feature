@@ -34,7 +34,7 @@ Feature: PRIIPS_Workflows
        And I relaunch the workflow from Initialisation
        And I click on step <StepActionName>
        And <StepActionName> switchs to success status before <timeOut>
-       And I click on step Audit
+       And I click on step <StepActionName>
        And <StepActionName> switchs to <StepStatus> before <timeOut>
       #  And I choose to download the <document>
       #  Then The <document> should be downloaded

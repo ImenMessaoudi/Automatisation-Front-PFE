@@ -15,7 +15,7 @@ Before(async function (scenario) {
   scenarioName = scenario.pickle.name
   this.attach(new Date().toISOString())
 
-  let path = "https://refprod-priips-test.bams.corp/impress/#/"
+  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html"
 
   await page.goto(path)
   //Connexion SSH 
