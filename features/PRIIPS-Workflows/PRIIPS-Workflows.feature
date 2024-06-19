@@ -42,7 +42,7 @@ Feature: PRIIPS_Workflows
  
     Examples:
       | user            | password          | criteria                                            | values                                             | StepActionName                                     | status   |timeOut    |StepActionName | StepStatus  | timeOut | document                                                   |                                                        
-      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;lu;en;001915  | Wait for RISK and PERF compute | success  |3000000    |Audit          | finished    | 3000000 | 001915_2022-12-31_PRIIPS-COSTS-RIY-COMPUTATION_lu_audit_v1 |
+      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;lu;en;001915  | Attente des calculs de risque et de la performance | success  |1000000    |Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-COSTS-RIY-COMPUTATION_lu_audit_v1 |
       | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-GERMANY-COMPUTATION;lu;en;001915    | Attente des calculs de risque et de la performance | success  |3000000    |Audit          | finished    | 3000000 | 001915_2022-12-31_PRIIPS-GERMANY-COMPUTATION_lu_audit_v1   |
  
    @IMPRESS-13946
