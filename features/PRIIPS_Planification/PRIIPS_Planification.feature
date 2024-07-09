@@ -112,8 +112,8 @@
 
      
         Examples:
-                  | user            | password    | screen        | criteria                   | values                           | 
-                  | abir.khabthani  |             | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |   
+                  | user            | password        | screen        | criteria                   | values                           | 
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |   
 
       @IMPRESS-15448
 
@@ -128,8 +128,8 @@
 
      
         Examples:
-                  | user            | password    | screen        | criteria                   | values                           | 
-                  | abir.khabthani  |             | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2026-08-22;LT;MONTHLY |  
+                  | user            | password         | screen        | criteria                   | values                           | 
+                  | imen.messaoudi  | NeoxamMess@2424  | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2026-08-22;LT;MONTHLY |  
 
 
 
@@ -145,8 +145,8 @@
 
      
         Examples:
-                  | user            | password    | screen        |           
-                  | abir.khabthani  |             | Planification | 
+                  | user            | password        | screen        |           
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | 
 
 
        @IMPRESS-15450
@@ -166,7 +166,7 @@
              Then The informations should be updated
      
         Examples:
-                  | user            | password    | screen        | criteria                  | values                          |  Frequency | ProductionStart | ProductionEnd |
-                  | abir.khabthani  |             | Planification | Début;Fin;Langue;Fréquence| 2023-08-22;2023-12-26;FR;Monthly|  Monthly   | 06/06/2023      | 30/6/2027     | 
+                  | user            | password           | screen        | criteria                  | values                          |  Frequency | ProductionStart | ProductionEnd |
+                  | imen.messaoudi  |  NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence| 2023-08-22;2023-12-26;FR;Monthly|  MONTHLY   | 06/06/2023      | 30/6/2027     | 
 
 

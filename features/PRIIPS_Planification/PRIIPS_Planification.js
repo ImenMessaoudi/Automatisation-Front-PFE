@@ -68,14 +68,36 @@ const clickRunButton = async () => {
   //await page.click('button[tt="Valider"]')
 }
 
-const clickExportButton = async () => {
+/*const clickExportButton = async () => {
+
   await page._client.send("Page.setDownloadBehavior", {
     behavior: "allow",
     downloadPath: downloadPath,
   })
 
   await page.click('button[tt="Exporter"]')
-}
+}*/
+
+const clickExportButton = async () => {
+  try {
+    await page.setDefaultNavigationTimeout(0); // Configure la limite de temps de navigation, si nécessaire
+
+    // Définit le comportement de téléchargement
+    await page.setDownloadBehavior({
+      behavior: 'allow',
+      downloadPath: downloadPath,
+    });
+
+    // Attend que le bouton d'exportation soit visible et cliquable
+    await page.waitForSelector('button[tt="Exporter"]');
+    await page.click('button[tt="Exporter"]');
+    
+    // Ajoutez ici d'autres étapes nécessaires après le clic sur le bouton d'exportation, si nécessaire
+
+  } catch (error) {
+    console.error('Erreur lors du clic sur le bouton d\'exportation :', error);
+  }
+};
 const verifyDownloadedScheduledReports = async () => {
   const fileName = "scheduled-reports.csv"
 

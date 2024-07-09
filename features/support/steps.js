@@ -16,10 +16,13 @@ Before(async function (scenario) {
   this.attach(new Date().toISOString())
 
 
-  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html"
+  let path = "https://refprod-priips-test.bams.corp/impress/#/"
   await page.goto(path)
+  await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
+  //await page.waitForTimeout(20000)
   //Connexion SSH 
   const sshConnection = await connectSSH()
+
  
     const updateCommand = `docker exec -i postgres psql -U postgres -c "update data set value = '110' where path = 'data.download_closing_months';"`;
     try {
@@ -54,7 +57,7 @@ Given("I am logged out", async function () {
 
 global.login = async (user, password) => {
   let logoSelector = `.login-pf-page-header img`
-  await page.waitForSelector(logoSelector,  { timeout: 90000 })
+  await page.waitForSelector(logoSelector,  { timeout: 60000 })
  
   let usernameInput = `#username`
   let passwordInput = `#password`
@@ -69,17 +72,12 @@ global.login = async (user, password) => {
   await loginForm.evaluate((form) => form.submit())
  
   try {
-    
     await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
-    await page.goto("https://refprod-priips-test.bams.corp/impress/digital/index.html", { waitUntil: 'networkidle0' });
   } catch (error) {
     logger.error("Login failure");
     throw "Login Failure!";
   }
-
-  let path = "https://refprod-priips-test.bams.corp/impress/digital/index.html#/?dashboard_filters=off&grouping=umbrella"
-  await page.goto(path)
-  await page.waitForSelector('.search-wrapper', { timeout: 120000 })
+  await page.waitForSelector('.search-wrapper', { timeout: 60000 })
 
  
 };
@@ -366,7 +364,8 @@ When("I click on button {}", async (buttonName) => {
 })
 
 const accessDetails = async () => {
-  await page.waitForSelector(".spreadsheet-inner a")
+  await page.waitForSelector(".spreadsheet-inner a", { timeout: 60000 }); 
+  //await page.waitForSelector(".spreadsheet-inner a")
   await page.click(".spreadsheet-inner a")
 }
 
@@ -730,3 +729,59 @@ Then(
 Then("I verify that the code action {} is displayed", async (CodeAction) => {
   await displayCodeAction(CodeAction)
 })
+
+When("I download {}", async (document) => {
+  await download(document)
+})
+ 
+const download = async (document) => {
+  const path = require("path")
+  const downloadPath = path.resolve("./Downloads")
+ 
+  //let src = await page.$('h2 a').getAttribute("href")
+ 
+  let sel = await page.waitForSelector("h2 a")
+ 
+  let src = await page.evaluate((sel) => sel.getAttribute("href"), sel)
+ 
+  let docName = `${document}`
+ 
+  if (src.includes(docName)) {
+ 
+    const client = await page.target().createCDPSession();
+    await client.send('Page.setDownloadBehavior', {
+    behavior: 'allow',
+    downloadPath: downloadPath,
+    })
+ 
+    await sel.click()
+  } else {
+    throw "Cant download document"
+  }
+ 
+}
+ 
+ 
+Then("{} is downloaded", async (document) => {
+  await verifDownload(document)
+})
+const verifDownload = async (document) => {
+  if (download(document) == true) {
+    const getMostRecentFile = (dir) => {
+      const files = orderReccentFiles(dir)
+      return files.length ? files[0] : undefined
+    }
+ 
+    const orderReccentFiles = (dir) => {
+      return fs
+        .readdirSync(dir)
+        .filter((file) => fs.lstatSync(path.join(dir, file)).isFile())
+        .map((file) => ({
+          file,
+          mtime: fs.lstatSync(path.join(dir, file)).mtime,
+        }))
+        .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
+    }
+  }
+}
+ 

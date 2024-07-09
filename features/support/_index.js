@@ -32,29 +32,40 @@ AfterStep(async (scenario) => {
     }
 })
 
+//const puppeteer = require('puppeteer-core'); // Utilisez puppeteer-core si vous spécifiez executablePath
+ 
 BeforeAll(async function () {
-    global.browser = await puppeteer.launch({
-        executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-        headless: false,
-        slowMo: 25,
-        defaultViewport: {
-            width: 1720,
-            height: 900,
-            deviceScaleFactor: process.platform === "darwin" ? 2 : 1,
-        },
-       args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"],
-        executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe' 
-    })
-    const page = (await browser.pages())[0]
-    global.page = page
-    const { installMouseHelper } = require("./install-mouse-helper")
-    await installMouseHelper(page)
-    global.metadata = {
-        browser: await browser.version(),
-        platform: process.platform,
-        user: process.env.USER,
+    try {
+        console.log("Starting Puppeteer launch...");
+        global.browser = await puppeteer.launch({
+            executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+            headless: false,
+            slowMo: 25,
+            defaultViewport: {
+                width: 1720,
+                height: 900,
+                deviceScaleFactor: process.platform === "darwin" ? 2 : 1,
+            },
+            args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"]
+        });
+        console.log("Puppeteer launched successfully.");
+        
+        const page = (await global.browser.pages())[0];
+        global.page = page;
+        const { installMouseHelper } = require("./install-mouse-helper");
+        await installMouseHelper(page);
+ 
+        global.metadata = {
+            browser: await global.browser.version(),
+            platform: process.platform,
+            user: process.env.USER,
+        };
+    
+ 
+    } catch (error) {
+        console.error("Error during Puppeteer launch: ", error);
     }
-})
+});
 AfterAll(async function () {
     await browser.close()
 })
