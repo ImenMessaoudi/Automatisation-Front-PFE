@@ -20,6 +20,7 @@
     "start": "npx open-cli http://localhost:8080/html/",
     "alerting": "node mailSender.js",
     "jsdoc": "node ./node_modules/jsdoc/jsdoc.js features/visage/*/*.js",
+    "lint": "eslint .",
     "build": "npm run lint && npm run build:prod",
     "build:prod": "webpack --mode production"
   },
