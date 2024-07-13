@@ -8,8 +8,7 @@ pipeline {
         remote_name = 'PRIIPS-PACKAGE-TEST'
         remote_host = '10.53.103.217'
         remote_user = 'runner'
-        remote_password = '[vUO84ni6xPkX_)o*:!=l7Y1QS0B3V'
-        remote_allowAnyHosts = true
+        remote_key_path = '/path/to/private/key' // Update this path to your private SSH key
     }
 
     stages {
@@ -57,8 +56,8 @@ pipeline {
                         name: env.remote_name,
                         host: env.remote_host,
                         user: env.remote_user,
-                        password: env.remote_password,
-                        allowAnyHosts: env.remote_allowAnyHosts
+                        key: env.remote_key_path,
+                        allowAnyHosts: true
                     ]
                 }
             }
@@ -90,11 +89,11 @@ pipeline {
             steps {
                 script {
                     sh """
-                    scp -o StrictHostKeyChecking=no automationProject-${BUILD_NUMBER}.tar.gz runner@${remote_host}:/home/runner/destination
+                    scp -i ${env.remote_key_path} -o StrictHostKeyChecking=no automationProject-${BUILD_NUMBER}.tar.gz runner@${remote_host}:/home/runner/destination
                     """
 
                     sh """
-                    sshpass -p '${remote_password}' ssh -o StrictHostKeyChecking=no runner@${remote_host} << 'EOF'
+                    ssh -i ${env.remote_key_path} -o StrictHostKeyChecking=no runner@${remote_host} << 'EOF'
                     if ! command -v node &> /dev/null; then
                         sudo apt update
                         sudo apt install -y nodejs npm
