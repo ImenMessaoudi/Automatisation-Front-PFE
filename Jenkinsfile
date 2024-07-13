@@ -5,13 +5,17 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/ImenMessaoudi/Automatisation-Front-PFE.git'
         ARTIFACTORY_URL = 'https://access.my-nx.com/artifactory'
         ARTIFACTORY_REPO = 'General/impress-artifacs/test'
+        remote_name = 'PRIIPS-PACKAGE-TEST'
+        remote_host = '10.53.103.217'
+        remote_user = 'runner'
+        remote_password = '[vUO84ni6xPkX_)o*:!=l7Y1QS0B3V'
+        remote_allowAnyHosts = true
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 script {
-                    // Cloner le repository Git
                     git branch: 'main', url: "${env.GIT_REPO_URL}"
                 }
             }
@@ -20,7 +24,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Installer les dépendances Node.js avec npm
                     sh "npm install"
                 }
             }
@@ -29,14 +32,9 @@ pipeline {
         stage('Build Project') {
             steps {
                 script {
-                    // Nettoyer et construire l'artefact
                     sh "rm -rf *.tar.gz"
                     sh "tar czf automationProject-${BUILD_NUMBER}.tar.gz node_modules cucumber.js package.json features"
-
-                    // Archiver l'artefact généré
                     archiveArtifacts artifacts: "automationProject-${BUILD_NUMBER}.tar.gz", allowEmptyArchive: true
-                    
-                    // Afficher l'emplacement de l'artefact
                     echo "L'artefact a été généré à l'emplacement : ${WORKSPACE}/automationProject-${BUILD_NUMBER}.tar.gz"
                 }
             }
@@ -45,58 +43,77 @@ pipeline {
         stage('Retrieve and Display Artifact') {
             steps {
                 script {
-                    // Définir le nom de l'artefact
                     def artifactName = "automationProject-${BUILD_NUMBER}.tar.gz"
-
-                    // Copier l'artefact archivé vers l'espace de travail actuel
                     copyArtifacts projectName: "${env.JOB_NAME}", selector: specific("${env.BUILD_NUMBER}"), filter: artifactName
-
-                    // Afficher le contenu de l'artefact (par exemple, lister les fichiers dans le tar.gz)
                     sh "tar -tzf ${artifactName}"
                 }
             }
         }
-        stage('Deploy and Test on VM') {
-    steps {
-        script {
-            // Transférer l'artefact sur la VM
-            sh """
-            scp -o StrictHostKeyChecking=no automationProject-${BUILD_NUMBER}.tar.gz runner@10.53.103.217:/home/runner/destination
-            """
 
-            // Se connecter à la VM et exécuter les commandes
-            sh """
-            sshpass -p '[vUO84ni6xPkX_)o*:!=l7Y1QS0B3V' ssh -o StrictHostKeyChecking=no runner@10.53.103.217 << 'EOF'
-            # Installer Node.js si non existant
-            if ! command -v node &> /dev/null; then
-                sudo apt update
-                sudo apt install -y nodejs npm
-            fi
-
-            # Décompresser l'artefact
-            tar xzf /home/runner/destination/automationProject-${BUILD_NUMBER}.tar.gz -C /home/runner/destination
-
-            # Accéder au répertoire décompressé
-            cd /home/runner/destination
-
-            # Installer les dépendances
-            npm install
-
-            # Exécuter les tests
-            npx cucumber-js
-            EOF
-            """
+        stage('Initialisation') {
+            steps {
+                script {
+                    remote = [
+                        name: env.remote_name,
+                        host: env.remote_host,
+                        user: env.remote_user,
+                        password: env.remote_password,
+                        allowAnyHosts: env.remote_allowAnyHosts
+                    ]
+                }
+            }
         }
-    }
-}
 
+        stage('Test Connexion SSH') {
+            steps {
+                script {
+                    echo "Connexion au serveur distant...."
+                    sshCommand remote: remote, command: 'echo "Connexion SSH réussie"'
+                }
+            }
+        }
 
-       
+        stage('Scripte SSH') {
+            steps {
+                script {
+                    echo "Connexion au serveur distant et exécution du script..."
+                    sshCommand remote: remote, command: '''
+                        wget -O install.sh https://access.my-nx.com/artifactory/nx-delivery/dh/impress/dev/impress-PRIIPS/install-PRIIPS.sh
+                        chmod +x ./install.sh
+                        nohup ./install.sh bulkMode=true > ./install.log 2>&1 &
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy and Test on VM') {
+            steps {
+                script {
+                    sh """
+                    scp -o StrictHostKeyChecking=no automationProject-${BUILD_NUMBER}.tar.gz runner@${remote_host}:/home/runner/destination
+                    """
+
+                    sh """
+                    sshpass -p '${remote_password}' ssh -o StrictHostKeyChecking=no runner@${remote_host} << 'EOF'
+                    if ! command -v node &> /dev/null; then
+                        sudo apt update
+                        sudo apt install -y nodejs npm
+                    fi
+
+                    tar xzf /home/runner/destination/automationProject-${BUILD_NUMBER}.tar.gz -C /home/runner/destination
+                    cd /home/runner/destination
+                    npm install
+                    npx cucumber-js
+                    EOF
+                    """
+                }
+            }
+        }
     }
 
     post {
         always {
-            cleanWs() // Nettoyer l'espace de travail à la fin de chaque build
+            cleanWs()
         }
     }
 }
