@@ -8,7 +8,7 @@ pipeline {
         remote_name = 'clone-of-REFPROD-PRIIPS-TEST'
         remote_host = '10.53.201.78'
         remote_user = 'runner'
-        remote_key_path = '/path/to/private/key' // Update this path to your private SSH key
+        remote_key_path = '#6?jN1REb:0ty9)4p^Ka2OkJ~i3B8M' // Update this path to your private SSH key
     }
 
     stages {
