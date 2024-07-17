@@ -53,10 +53,10 @@ pipeline {
             steps {
                 script {
                     remote = [
-                        name: env.remote_name,
-                        host: env.remote_host,
-                        user: env.remote_user,
-                        key: env.remote_key_path,
+                        name: remote_name,
+                        host: remote_host,
+                        user: remote_user,
+                        password: remote_password,
                         allowAnyHosts: remote_allowAnyHosts
                     ]
                 }
