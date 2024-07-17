@@ -115,10 +115,10 @@ global.connectSSH = async () => {
         sshConnection.on('ready', resolve);
         sshConnection.on('error', reject);
         sshConnection.connect({
-            host: 'REFPROD-PRIIPS-TEST',
+            host: 'clone-of-REFPROD-PRIIPS-TEST',
             port: 22,
             username: 'runner',
-            password: '^$@h9!o6N[<SExH73fDdByc4b21k|5',
+            password: '#6?jN1REb:0ty9)4p^Ka2OkJ~i3B8M',
         });
     })
     return sshConnection;

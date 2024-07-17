@@ -5,8 +5,8 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/ImenMessaoudi/Automatisation-Front-PFE.git'
         ARTIFACTORY_URL = 'https://access.my-nx.com/artifactory'
         ARTIFACTORY_REPO = 'General/impress-artifacs/test'
-        remote_name = 'PRIIPS-PACKAGE-TEST'
-        remote_host = '10.53.103.217'
+        remote_name = 'clone-of-REFPROD-PRIIPS-TEST'
+        remote_host = '10.53.201.78'
         remote_user = 'runner'
         remote_key_path = '/path/to/private/key' // Update this path to your private SSH key
     }
@@ -102,7 +102,7 @@ pipeline {
                     tar xzf /home/runner/destination/automationProject-${BUILD_NUMBER}.tar.gz -C /home/runner/destination
                     cd /home/runner/destination
                     npm install
-                    npx cucumber-js
+                    npx cucumber-js -t @IMPRESS-15442
                     EOF
                     """
                 }

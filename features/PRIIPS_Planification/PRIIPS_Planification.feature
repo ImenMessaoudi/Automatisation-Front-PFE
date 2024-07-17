@@ -167,6 +167,6 @@
      
         Examples:
                   | user            | password           | screen        | criteria                  | values                          |  Frequency | ProductionStart | ProductionEnd |
-                  | imen.messaoudi  |  NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence| 2023-08-22;2023-12-26;FR;Monthly|  MONTHLY   | 06/06/2023      | 30/6/2027     | 
+                  | imen.messaoudi  |  NeoxamMess@2424   | Planification | Début;Fin;Langue          | 2023-08-22;2023-12-26;FR        |  MONTHLY   | 06/06/2023      | 30/6/2027     | 
 
 
