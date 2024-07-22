@@ -5,10 +5,11 @@ pipeline {
         GIT_REPO_URL = 'https://github.com/ImenMessaoudi/Automatisation-Front-PFE.git'
         ARTIFACTORY_URL = 'https://access.my-nx.com/artifactory'
         ARTIFACTORY_REPO = 'General/impress-artifacs/test'
-        remote_name = 'clone-of-REFPROD-PRIIPS-TEST'
+       remote_name = 'clone-of-REFPROD-PRIIPS-TEST'
         remote_host = '10.53.201.78'
         remote_user = 'runner'
-        remote_password = '#6?jN1REb:0ty9)4p^Ka2OkJ~i3B8M' // Update this path to your private SSH key
+        remote_password = '#6?jN1REb:0ty9)4p^Ka2OkJ~i3B8M'
+        remote_allowAnyHosts = true// Update this path to your private SSH key
     }
 
     stages {

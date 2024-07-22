@@ -1,0 +1,11 @@
+machines:
+  - name: vm1
+    label: vm1-label
+    ip: 192.168.1.101
+    user: jenkins
+    sshKey: /path/to/ssh/key1.pem
+  - name: vm2
+    label: vm2-label
+    ip: 192.168.1.102
+    user: jenkins
+    sshKey: /path/to/ssh/key2.pem

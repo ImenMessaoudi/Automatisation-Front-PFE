@@ -33,8 +33,8 @@ Feature: Search Bar
 
 
         Examples:
-                  | user           | password | criteria                                 | values                          | columns                 | items                         | spreadsheetHeader                                                                                                                                                |
-                  | IMP_AUTOMATION | Neoxam23 | Closing month;Document;Short code;Status | 2022-06;AA-FR-UCITS;AA;Finished | Closing;Doc.;Doc.;Steps | 30/12/20;AA-FR-UCITS;AA;12/12 | Steps;Prio;Owner;Doc.;Off.;Jurid - Lang;Man Co;Auditor;Fund;Fund name;Share code;Share Name;Reg;Vehicle;Closing;Man Co val;Comput./Gener.;Val. auditor;Diffusion |
+                  | user           | password        | criteria                                 | values                          | columns                 | items                         | spreadsheetHeader                                                                                                                                                |
+                  | imen.messaoudi | NeoxamMess@2424 | Closing month;Document;Short code;Status | 2022-06;AA-FR-UCITS;AA;Finished | Closing;Doc.;Doc.;Steps | 30/12/20;AA-FR-UCITS;AA;12/12 | Steps;Prio;Owner;Doc.;Off.;Jurid - Lang;Man Co;Auditor;Fund;Fund name;Share code;Share Name;Reg;Vehicle;Closing;Man Co val;Comput./Gener.;Val. auditor;Diffusion |
 
        
         @IMPRESS-10100
@@ -48,6 +48,6 @@ Feature: Search Bar
             
 
         Examples:
-                  | user           | password | criteria  | values | columns | items  | spreadsheetHeader                                                                                                                                                |
-                  | IMP_AUTOMATION | Neoxam23 | Fund code | 050645 | Fund    | 050645 | Steps;Prio;Owner;Doc.;Off.;Jurid - Lang;Man Co;Auditor;Fund;Fund name;Share code;Share Name;Reg;Vehicle;Closing;Man Co val;Comput./Gener.;Val. auditor;Diffusion |
+                  | user           | password        | criteria  | values | columns | items  | spreadsheetHeader                                                                                                                                                |
+                  | imen.messaoudi | NeoxamMess@2424 | Fund code | 050645 | Fund    | 050645 | Steps;Prio;Owner;Doc.;Off.;Jurid - Lang;Man Co;Auditor;Fund;Fund name;Share code;Share Name;Reg;Vehicle;Closing;Man Co val;Comput./Gener.;Val. auditor;Diffusion |
                  
