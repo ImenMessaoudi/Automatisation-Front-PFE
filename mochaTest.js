@@ -18,3 +18,5 @@ mocha.addFile('test/test2.js');
 mocha.run(failures => {
     process.exitCode = failures ? 1 : 0;  // Mettre à jour le code de sortie de Node.js en fonction des échecs de test
 });
+
+////test
