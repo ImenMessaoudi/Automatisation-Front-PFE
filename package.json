@@ -22,7 +22,8 @@
     "jsdoc": "node ./node_modules/jsdoc/jsdoc.js features/visage/*/*.js",
     "lint": "eslint .",
     "build": "npm run lint && npm run build:prod",
-    "build:prod": "webpack --mode production"
+    "build:prod": "webpack --mode production",
+    "test:mocha": "mocha test/"
   },
   "dependencies": {
     "@cucumber/cucumber": "^8.10.0",
