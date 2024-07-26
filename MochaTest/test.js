@@ -10,8 +10,8 @@ const mocha = new Mocha({
 });
 
 // Ajouter les fichiers de test à exécuter
-mocha.addFile('test/test1.js');
-mocha.addFile('test/test2.js');
+mocha.addFile('test-mocha/test1.js');
+mocha.addFile('test-mocha/test2.js');
 // Ajouter d'autres fichiers de test si nécessaire
 
 // Exécuter les tests
