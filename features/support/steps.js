@@ -15,8 +15,9 @@ Before(async function (scenario) {
   scenarioName = scenario.pickle.name
   this.attach(new Date().toISOString())
 
-
-  let path = "https://clone-of-refprod-priips-test.bams.corp/impress/#/"
+  
+  //let path = "https://clone-of-refprod-priips-test.bams.corp/impress/#/"
+  let path = "https://refprod-priips-test.bams.corp/impress/#/"
   await page.goto(path)
   await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
   //await page.waitForTimeout(20000)
