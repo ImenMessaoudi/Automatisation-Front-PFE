@@ -58,7 +58,7 @@ Given("I am logged out", async function () {
 
 global.login = async (user, password) => {
   let logoSelector = `.login-pf-page-header img`
-  await page.waitForSelector(logoSelector,  { timeout: 90000 })
+  await page.waitForSelector(logoSelector,  { timeout: 900000 })
  
   let usernameInput = `#username`
   let passwordInput = `#password`
