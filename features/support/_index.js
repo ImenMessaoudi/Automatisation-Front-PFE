@@ -38,7 +38,8 @@ BeforeAll(async function () {
     try {
         console.log("Starting Puppeteer launch...");
         global.browser = await puppeteer.launch({
-            executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+            //executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+            executablePath: '/usr/bin/microsoft-edge',
             headless: false,
             slowMo: 25,
             defaultViewport: {
