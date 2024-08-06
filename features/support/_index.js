@@ -43,10 +43,12 @@ BeforeAll(async function () {
             executablePath: '/usr/bin/microsoft-edge',
             headless: false,
             slowMo: 25,
+            ignoreHTTPSErrors: true,
             defaultViewport: {
                 width: 1720,
                 height: 900,
                 deviceScaleFactor: process.platform === "darwin" ? 2 : 1,
+        
             },
             args: ["--start-maximized", "--no-sandbox", "--disable-setuid-sandbox"]
         });

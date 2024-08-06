@@ -14,17 +14,7 @@ let scenarioName = ""
 Before(async function (scenario) {
   scenarioName = scenario.pickle.name
   this.attach(new Date().toISOString())
-
-  //Configure Puppeteer avec l'option pour ignorer les erreurs de certificat
-  if (!global.browser) {
-    global.browser = await puppeteer.launch({
-      headless: true,
-      args: ['--ignore-certificate-errors'],
-    });
-  }
-  if (!global.page) {
-    global.page = await global.browser.newPage();
-  }
+  
   //let path = "https://clone-of-refprod-priips-test.bams.corp/impress/#/"
   let path = "https://refprod-priips-test.bams.corp/impress/#/"
   await page.goto(path)
