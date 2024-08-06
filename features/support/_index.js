@@ -27,7 +27,8 @@ setDefinitionFunctionWrapper(function (fn) {
 
 AfterStep(async (scenario) => {
     if (scenario.result.status === Status.PASSED) {
-        await page.waitForTimeout(1000)
+        //await page.waitForTimeout(10000)
+       
         context.attach(await page.screenshot(), "image/png")
     }
 })
