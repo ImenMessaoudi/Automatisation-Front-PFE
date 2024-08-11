@@ -20,9 +20,9 @@ Feature: PRIIPS_Workflows
 
  
     Examples:
-      | user            | password           | criteria                                            | values                                             | StepActionName | StepStatus  | timeOut | document                                       |                                                        
-      | imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2023-02;PRIIPS-RISK-PERF-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2023-02-28_PRIIPS-RISK-PERF-COMPUTATION |
-      #| imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-NARRATIVE-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-NARRATIVE-COMPUTATION |
+      | user            | password           | criteria                                            | values                                              | StepActionName | StepStatus  | timeOut | document                                       |                                                        
+      #| imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2023-02;PRIIPS-RISK-PERF-COMPUTATION;lu;en;001915   | Audit          | finished    | 1000000 | 001915_2023-02-28_PRIIPS-RISK-PERF-COMPUTATION |
+      | imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-NARRATIVE-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-NARRATIVE-COMPUTATION |
       #| imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-PAST-PERF-COMPUTATION |
  
  

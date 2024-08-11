@@ -6,6 +6,7 @@ const fs = require("fs")
 var dateTimeSys
 const moment = require("moment")
 
+
 let { NodeSSH } = require("node-ssh")
 const shell = require("shelljs")
 const exec = require("node-ssh-exec")
@@ -14,8 +15,10 @@ let scenarioName = ""
 Before(async function (scenario) {
   scenarioName = scenario.pickle.name
   this.attach(new Date().toISOString())
+
+
   
-  //let path = "https://clone-of-refprod-priips-test.bams.corp/impress/#/"
+  //let path = "https://irepptnr-001915-2023-02-21-tst.bams.corp/impress/#/"
   let path = "https://refprod-priips-test.bams.corp/impress/#/"
   await page.goto(path)
   await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
@@ -34,21 +37,49 @@ Before(async function (scenario) {
 })
 
 After(async function () {
- 
-  let retry = 0
-  while (++retry <= 3) {
-    try {
-      await page.evaluate(() => logout())
-      break
-    } catch (e) {
-      if (retry === 5) throw e
+  try {
+    // Essayer de se déconnecter avec des tentatives de réessai
+    let retry = 0;
+    while (++retry <= 3) {
+      try {
+        if (page && page.isClosed() === false) {
+          await page.evaluate(() => logout());
+        }
+        break;
+      } catch (e) {
+        if (retry === 3) throw e; // Rejeter après 3 tentatives échouées
+      }
     }
-  } 
-await page.waitForTimeout(20000)
- 
-this.attach(new Date().toISOString())
- 
-})
+
+    // Attendre 20 secondes
+    await new Promise(resolve => setTimeout(resolve, 20000));
+
+  } catch (error) {
+    console.error('Error during after hook:', error);
+  } finally {
+    // Assurer que la page et le navigateur sont fermés
+    try {
+      if (page && !page.isClosed()) {
+        await page.close();
+      }
+    } catch (error) {
+      console.error('Error closing page:', error);
+    }
+    try {
+      if (browser) {
+        await browser.close();
+      }
+    } catch (error) {
+      console.error('Error closing browser:', error);
+    }
+  }
+
+  // Ajouter une attache de log si nécessaire
+  if (this.attach) {
+    this.attach(new Date().toISOString());
+  }
+});
+
 
 Given("I am logged out", async function () {
   await logout(scenarioName)
@@ -741,6 +772,7 @@ const download = async (document) => {
   //let src = await page.$('h2 a').getAttribute("href")
  
   let sel = await page.waitForSelector("h2 a")
+  
  
   let src = await page.evaluate((sel) => sel.getAttribute("href"), sel)
  

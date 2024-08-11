@@ -70,9 +70,26 @@ BeforeAll(async function () {
         console.error("Error during Puppeteer launch: ", error);
     }
 });
-AfterAll(async function () {
-    await browser.close()
-})
+
+AfterAll(async () => {
+    try {
+      if (browser) {
+        // Vérifiez que le navigateur est encore ouvert
+        const pages = await browser.pages();
+        if (pages.length > 0) {
+          // Vous pouvez également essayer de fermer toutes les pages ouvertes
+          await Promise.all(pages.map(page => page.close()));
+        }
+        
+        // Fermez le navigateur
+        await browser.close();
+      }
+    } catch (e) {
+      console.error('Erreur lors de la fermeture du navigateur:', e);
+    }
+  });
+  
+  
 Promise.map = async (arr, fn) =>
     await arr.reduce(
         async (acc, v, i) => ((await acc).push(await fn(v, i)), acc),

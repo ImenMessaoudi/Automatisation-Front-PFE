@@ -389,7 +389,7 @@ var getStepStatus = async (stepStatus, timeOut) => {
   try {
     await page.waitForFunction(
       (stepStatus, theStepStatus) => stepStatus === theStepStatus.classList[1],
-      { timeout: 1800000 },
+      { timeout: timeOut },
       stepStatus,
       theStepStatus
     )
