@@ -29,17 +29,20 @@ Feature: Follow-up Screen : User Panel Info
                   | imen.messaoudi | NeoxamMess@2424 |
         
         @IMPRESS-97451
-        
+
         Scenario Outline: Test Abor
 
             Given I am logged in with <user> and <password>
             When  I select the preference menu in the left menu
             And I click in the Abor menu
-            Then JNLP file is Downloaded
+            And JNLP file is Downloaded
+            And I logout
+             Then I should be logged out
 
         Examples:
                   | user           | password        |
                   | imen.messaoudi | NeoxamMess@2424 |
+                  | nicolas.demy   | ACHANGER        |
 
         @IMPRESS-9747
         Scenario Outline: Test language
@@ -55,6 +58,8 @@ Feature: Follow-up Screen : User Panel Info
                   | user           | password        | languageButton | menus                 |
                   | imen.messaoudi | NeoxamMess@2424 | FR             | Suivi;Tableau de bord |
                   | imen.messaoudi | NeoxamMess@2424 | EN             | Follow-up;Dashboard   |
+                  | imen.messaoudi | NeoxamMess@2424 | FR             | Suivi                 |
+                  | imen.messaoudi | NeoxamMess@2424 | EN             | Follow-up             |
         
 
 

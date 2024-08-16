@@ -112,6 +112,8 @@
                   | user            | password        | screen        | criteria                   | values                           | 
                   | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |  
                   | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2022-08-31;2025-12-31;FR;MONTHLY |
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |  
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2022-08-31;2025-12-31;FR;MONTHLY |
 
       @IMPRESS-15447
 
@@ -156,11 +158,14 @@
              When I navigate to the screen <screen>
              And I click on the Export icon
              Then The scheduled reports document should be downloaded
+             And I logout
+             Then I should be logged out
 
      
         Examples:
                   | user            | password        | screen        |           
-                  | imen.messaoudi  | NeoxamMess@2424 | Planification | 
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification |
+                  | nicolas.demy    | ACHANGER        | Planification | 
 
 
        @IMPRESS-15450

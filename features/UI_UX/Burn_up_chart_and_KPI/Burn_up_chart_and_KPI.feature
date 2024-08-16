@@ -68,12 +68,15 @@ Feature: Burn up chart and KPI
               And I select the step <step>
              #Then The finished runs and the expected runs charts are displayed
               #And The legend is displayed
+              And I logout
+             Then I should be logged out
 
        
         Examples:
 
                   | user           | password        | screen          | step                |
                   | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Validation auditeur |
+                  | nicolas.demy   | ACHANGER        | Tableau de bord | Validation auditeur |
                 
 
         @IMPRESS-106732

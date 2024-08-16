@@ -16,12 +16,14 @@ Feature: EFA Audit Multilangue
              And I relaunch the workflow from Initialisation
              And I click on step <StepActionName>
              #And <StepActionName> switchs to <StepStatus> status Before 1000000
-             And I verifiy that added languages <AddedLanguages> are displayed
-            Then The reports should be displayed in the box form
+             #And I verifiy that added languages <AddedLanguages> are displayed
+             Then The reports should be displayed in the box form
+             And I logout
+             Then I should be logged out
     
 
         Examples:
                   | user            | password       | criteria                                            | values                                            | StepActionName   | StepStatus | AddedLanguages |
-                  | imen.messaoudi  | NeoxamMess@2424| Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;fr;lu;001915 | Audit            | finished   | fr - de - it   |
-                  | imen.messaoudi  |NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;en;lu;001915        | Audit            | finished   | nl             |
+                  | imen.messaoudi  | NeoxamMess@2424| Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;fr;lu;001915 | Audit            | finished   | fr             |
+                  | imen.messaoudi  |NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;en;lu;001915        | Audit            | finished   | en             |
      

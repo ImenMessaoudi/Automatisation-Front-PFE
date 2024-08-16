@@ -73,7 +73,7 @@ Feature: French annual account workflow
    
   
         Examples:
-                  | user           | password | criteria                                                   | values                                     | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut | steps        | OtherStepStatus         |
+                  | user           | password | criteria                                                   | values                        | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut | steps        | OtherStepStatus         |
                   | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;EPT_V2.1;LU;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success |
                   | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;EPT_V2.1;LU;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success | 
 
