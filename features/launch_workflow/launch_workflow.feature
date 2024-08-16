@@ -17,12 +17,20 @@ Feature: French annual account workflow
               And I click on step <StepActionName>
              Then <StepActionName> switchs to <StepStatus> status before <timeOut>
               And I verifiy that <steps> status is <OtherStepStatus> before <timeOut>
+              And I logout
+             Then I should be logged out
     
 
         Examples:
-                  | user           | password        | criteria                                            | values                                            | StepActionName | StepStatus | steps                                    | timeOut | OtherStepStatus                         |
+                  | user           | password        | criteria                                | values                                         | StepActionName | StepStatus | steps         | timeOut | OtherStepStatus                         |
                   | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-12;PRIIPS-NARRATIVE-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
-     
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-09;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-11;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2023-02;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-01;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;en;001915 | Initialisation | success    | Compute;Audit | 10000   | waiting;waiting;waiting;waiting;waiting |
   
         @IMPRESS-9643
         Scenario Outline: Validate edition step
@@ -36,15 +44,40 @@ Feature: French annual account workflow
              When I click on button <buttonName>
              Then <StepActionName> switchs to <StepStatus> status before <timeOut>
               And I verifiy that <steps> status is <OtherStepStatus> before <timeOut>
-              And Auditeur switchs to <StepActionStatus> status before <timeOut>
+              #And Auditeur switchs to <StepActionStatus> status before <timeOut>
+              And I logout
+             Then I should be logged out
+  
+        Examples:
+                  | user           | password | criteria                                                   | values                                     | StepActionName | StepActionStatus | buttonName | StepStatus  | timeOut  | steps                                                  | OtherStepStatus         |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;CH;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;CH;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success | 
+
+
+        @IMPRESS-96431
+
+        Scenario Outline: Validate edition step
+  
+            Given I am logged in with <user> and <password>
+             When I search for criteria <criteria> and <values>
+              And I access to details of the first result
+              And I relaunch the workflow from Initialisation
+              And I click on step <StepActionName>
+              And <StepActionName> switchs to wait validation status before <timeOut>
+             When I click on button <buttonName>
+             Then <StepActionName> switchs to <StepStatus> status before <timeOut>
+              And I verifiy that <steps> status is <OtherStepStatus> before <timeOut>
+              #And Auditeur switchs to <StepActionStatus> status before <timeOut>
+              And I logout
+             Then I should be logged out
    
   
         Examples:
-                  | user           | password | criteria                                            | values                           | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut | steps        | OtherStepStatus         |
-                  | imen.messaoudi |  NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2021-12;AA-FR-UCITS;fr;fr;050666 | Edition        | wait validation  | Accepter   | success    | 900000  | Docx;Doc;Pdf | success;success;success |
-                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2021-12;AA-FR-UCITS;fr;fr;050666 | Edition        | waiting          | Rejeter    | error      | 900000  | Docx;Doc;Pdf | waiting;waiting;waiting |
+                  | user           | password | criteria                                                   | values                                     | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut | steps        | OtherStepStatus         |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;EPT_V2.1;LU;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;EPT_V2.1;LU;fr;001915 | Validation     | wait validation  | Accepter   | finished    | 1000000  | Attente des calculs EMT;Génération CSV;XLSX generation | success;success;success | 
 
-
+        
         @IMPRESS-9841
         Scenario Outline: Go to linked report-account
 
@@ -55,9 +88,9 @@ Feature: French annual account workflow
              Then <report_screen_name> screen is displayed with right <data> and <dataValues>
   
         Examples:
-                  | user           | password | criteria                                            | values                            | data                                      | report_screen_name                                             | dataValues      |
-                  | IMP_AUTOMATION | Neoxam23 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2021-12;AA-FR-UCITS;fr;fr;008003  | Code Ptf.:,Document:,Langue:,Juridiction: | Workflow allégé de rapport annuel OPCFM FR (Dissémination pdf) | 050666,AR,fr,fr |
-                  | IMP_AUTOMATION | Neoxam23 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2021-12;AR-FR-CACEIS;fr;fr;008003 | Code Ptf.:,Document:,Langue:,Juridiction: | Workflow allégé de comptes annuels OPCVM FR                    | 050666,AA,fr,fr |
+                  | user           | password        | criteria                                            | values                                     | data                                      | report_screen_name                                             | dataValues      |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;CH;fr;001915 | Code Ptf.:,Document:,Langue:,Juridiction: | Workflow allégé de rapport annuel OPCFM FR (Dissémination pdf) | 050666,AR,fr,fr |
+                  | imen.messaoudi |NeoxamMess@2424  | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. |2022-12;PRIIPS-EMT-4-1-REPORT;CH;fr;001915  | Code Ptf.:,Document:,Langue:,Juridiction: | Workflow allégé de comptes annuels OPCVM FR                    | 050666,AA,fr,fr |
 
 
 

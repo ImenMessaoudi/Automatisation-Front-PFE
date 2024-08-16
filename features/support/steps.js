@@ -37,49 +37,28 @@ Before(async function (scenario) {
 })
 
 After(async function () {
-  try {
-    // Essayer de se déconnecter avec des tentatives de réessai
-    let retry = 0;
-    while (++retry <= 3) {
-      try {
-        if (page && page.isClosed() === false) {
-          await page.evaluate(() => logout());
-        }
-        break;
-      } catch (e) {
-        if (retry === 3) throw e; // Rejeter après 3 tentatives échouées
-      }
-    }
+  let retry = 0;
 
-    // Attendre 20 secondes
-    await new Promise(resolve => setTimeout(resolve, 20000));
-
-  } catch (error) {
-    console.error('Error during after hook:', error);
-  } finally {
-    // Assurer que la page et le navigateur sont fermés
+  while (++retry <= 3) {
     try {
-      if (page && !page.isClosed()) {
-        await page.close();
+      // Vérifiez si la fonction `logout` existe dans le contexte de la page
+      const functionExists = await page.evaluate(() => typeof logout === 'function');
+      if (!functionExists) {
+        throw new Error('La fonction `logout` n\'est pas définie dans le contexte de la page.');
       }
-    } catch (error) {
-      console.error('Error closing page:', error);
-    }
-    try {
-      if (browser) {
-        await browser.close();
-      }
-    } catch (error) {
-      console.error('Error closing browser:', error);
-    }
-  }
 
-  // Ajouter une attache de log si nécessaire
-  if (this.attach) {
-    this.attach(new Date().toISOString());
+      await page.evaluate(() => logout());
+      console.log(`Déconnexion réussie à la tentative ${retry}`);
+      break; // Si l'opération réussit, sortir de la boucle
+    } catch (e) {
+      console.log(`Tentative ${retry} échouée: ${e.message}`);
+      if (retry === 3) { // Si nous avons atteint la dernière tentative
+        throw e; // Lancer l'erreur après les tentatives échouées
+      }
+      await page.waitForTimeout(2000); // Attendre 2 secondes avant de réessayer
+    }
   }
 });
-
 
 Given("I am logged out", async function () {
   await logout(scenarioName)

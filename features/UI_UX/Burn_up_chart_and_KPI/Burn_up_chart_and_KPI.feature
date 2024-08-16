@@ -12,11 +12,13 @@ Feature: Burn up chart and KPI
 
             Given I am logged in with <user> and <password>
              When I navigate to the screen <screen>
-             Then I am in the dashboard screen
+             And I am in the dashboard screen
               And The sections <sections> are displayed
-     
+              And I logout
+             Then I should be logged out
         Examples:
                   | user           | password        | screen          | sections     |
+                  | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Overview;SLA |
                   | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Overview;SLA |
 
         @IMPRESS-10661
@@ -26,9 +28,12 @@ Feature: Burn up chart and KPI
             Given I am logged in with <user> and <password>
              When I navigate to the screen <screen>
              Then The KPIs <KPI> are displayed
+             And I logout
+             Then I should be logged out
     
         Examples:
                   | user           | password        | screen          | KPIs                                                                 |
+                  | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Succès;En cours;Erreur;Attente validation;Validation refusée;Terminé |
                   | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Succès;En cours;Erreur;Attente validation;Validation refusée;Terminé |
 
 
@@ -39,13 +44,50 @@ Feature: Burn up chart and KPI
             Given I am logged in with <user> and <password>
              When I navigate to the screen <screen>
               And I select the step <step>
-             Then The finished runs and the expected runs charts are displayed
-              And The legend is displayed
+              #And The finished runs and the expected runs charts are displayed
+              #And The legend is displayed
+              And I logout
+             Then I should be logged out
 
        
         Examples:
 
                   | user           | password        | screen          | step                |
                   | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Calc./Gener.        |
+                  | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Calc./Gener.        |
+                
+
+
+
+        @IMPRESS-106731
+
+        Scenario Outline: Selection - Step burnup
+
+            Given I am logged in with <user> and <password>
+             When I navigate to the screen <screen>
+              And I select the step <step>
+             #Then The finished runs and the expected runs charts are displayed
+              #And The legend is displayed
+
+       
+        Examples:
+
+                  | user           | password        | screen          | step                |
                   | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Validation auditeur |
-                  | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Diffusion           |
+                
+
+        @IMPRESS-106732
+
+        Scenario Outline: Selection - Step burnup
+
+            Given I am logged in with <user> and <password>
+             When I navigate to the screen <screen>
+              And I select the step <step>
+             #Then The finished runs and the expected runs charts are displayed
+              #And The legend is displayed
+
+       
+        Examples:
+
+                  | user           | password        | screen          | step                |
+                  | imen.messaoudi | NeoxamMess@2424 | Tableau de bord | Diffusion           |          

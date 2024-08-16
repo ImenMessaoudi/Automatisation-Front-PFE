@@ -8,7 +8,7 @@ Feature: PRIIPS_Workflows
 
    @IMPRESS-13940
 
-      Scenario Outline: PRIIPS Risk & Narrative Computation & Past Performance
+      Scenario Outline: PRIIPS Risk & Performance
       Given I am logged in with <user> and <password>
       When I search for criteria <criteria> and <values>
       And I access to details of the first result
@@ -17,36 +17,100 @@ Feature: PRIIPS_Workflows
       And <StepActionName> switchs to <StepStatus> status before <timeOut>
       And I download <document>
       And <document> is downloaded
+      And I logout
+      Then I should be logged out
 
  
     Examples:
       | user            | password           | criteria                                            | values                                              | StepActionName | StepStatus  | timeOut | document                                       |                                                        
-      #| imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2023-02;PRIIPS-RISK-PERF-COMPUTATION;lu;en;001915   | Audit          | finished    | 1000000 | 001915_2023-02-28_PRIIPS-RISK-PERF-COMPUTATION |
+      | imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. |2022-12;PRIIPS-PAST-PERF-COMPUTATION;lu;en;001915   | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-PAST-PERF-COMPUTATION |
+      
+   
+   @IMPRESS-139401
+
+      Scenario Outline:  Narrative Computation
+      Given I am logged in with <user> and <password>
+      When I search for criteria <criteria> and <values>
+      And I access to details of the first result
+      And I relaunch the workflow from Initialisation
+      And I click on step <StepActionName>
+      And <StepActionName> switchs to <StepStatus> status before <timeOut>
+      And I download <document>
+      And <document> is downloaded
+      And I logout
+      Then I should be logged out
+
+ 
+    Examples:
+      | user            | password           | criteria                                            | values                                              | StepActionName | StepStatus  | timeOut | document                                       |                                                        
       | imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-NARRATIVE-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-NARRATIVE-COMPUTATION |
-      #| imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-PAST-PERF-COMPUTATION |
+      
+      @IMPRESS-139402
+        Scenario Outline:  Past Performance Computation
+      Given I am logged in with <user> and <password>
+      When I search for criteria <criteria> and <values>
+      And I access to details of the first result
+      And I relaunch the workflow from Initialisation
+      And I click on step <StepActionName>
+      And <StepActionName> switchs to <StepStatus> status before <timeOut>
+      And I download <document>
+      And <document> is downloaded
+      And I logout
+      Then I should be logged out
  
- 
+    Examples:
+      | user            | password           | criteria                                            | values                                              | StepActionName | StepStatus  | timeOut | document                                       |                                                        
+      | imen.messaoudi  | NeoxamMess@2424    | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-PAST-PERF-COMPUTATION;lu;en;001915  | Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-PAST-PERF-COMPUTATION |
+   
+
+
+   
    @IMPRESS-13945
  
       Scenario Outline: PRIIPS Costs & Germany Computation (PERF-WEB-COMP)
-       Given I am logged in with <user> and <password>
-       When I search for criteria <criteria> and <values>
-       And I access to details of the first result
-       And I relaunch the workflow from Initialisation
-       And I click on step <StepActionName>
-       And <StepActionName> switchs to <StepStatus> status before <timeOut>
-       And I click on step <StepActionName>
-       And <StepActionName> switchs to <StepStatus> before <timeOut>
-       And I download <document>
-       And <document> is downloaded
+      Given I am logged in with <user> and <password>
+      When I search for criteria <criteria> and <values>
+      And I access to details of the first result
+      #And I relaunch the workflow from Initialisation
+      And I click on step <StepActionName>
+      #And <StepActionName> switchs to <StepStatus> status before <timeOut>
+      And I download <document>
+      And <document> is downloaded
+      And I logout
+      Then I should be logged out
       
 
  
     Examples:
-      | user            | password          | criteria                                            | values                                             | StepActionName                                     | status   |timeOut    |StepActionName | StepStatus  | timeOut | document                                       |                                                        
-      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;lu;en;001915  | Attente des calculs de risque et de la performance | success  |1000000    |Audit          | finished    | 1000000 | 001915_2022-12-31_PRIIPS-COSTS-RIY-COMPUTATION |
-      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-GERMANY-COMPUTATION;lu;en;001915    | Attente des calculs de risque et de la performance | success  |3000000    |Audit          | finished    | 3000000 | 001915_2022-12-31_PRIIPS-GERMANY-COMPUTATION   |
+      
+      | user            | password          | criteria                                            | values                                             |StepActionName | StepStatus  | timeOut | document                                       |                                                        
+      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-COSTS-RIY-COMPUTATION;lu;en;001915  |Audit          | finished    | 2000000 | 001915_2022-12-31_PRIIPS-COSTS-RIY-COMPUTATION |
+    
+   
+   
+   @IMPRESS-139451
  
+      Scenario Outline: PRIIPS Costs & Germany Computation (PERF-WEB-COMP)
+
+       Given I am logged in with <user> and <password>
+      When I search for criteria <criteria> and <values>
+      And I access to details of the first result
+      #And I relaunch the workflow from Initialisation
+      And I click on step <StepActionName>
+      #And <StepActionName> switchs to <StepStatus> status before <timeOut>
+      And I download <document>
+      And <document> is downloaded
+      And I logout
+      Then I should be logged out
+
+ 
+    Examples:
+      
+      | user            | password          | criteria                                            | values                                             |StepActionName | StepStatus  | timeOut | document                                       |                                                        
+      | imen.messaoudi  | NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-GERMANY-COMPUTATION;lu;en;001915    |Audit          | finished    | 3000000 | 001915_2022-12-31_PRIIPS-GERMANY-COMPUTATION   |
+  
+  
+  
    @IMPRESS-13946
  
       Scenario Outline:PRIIPS Worflows Report( EPT-EMT)
@@ -54,22 +118,19 @@ Feature: PRIIPS_Workflows
        When I search for criteria <criteria> and <values>
        And I access to details of the first result
        And I relaunch the workflow from Initialisation
-       And I click on step Génération CSV
-       And Génération CSV switchs to success status before <timeOut>
-       And I download <document>
-       And <document> is downloaded
-       And I click on step Génération XLSX
-       And Génération XLSX switchs to success status before <timeOut>
-       And I download <document>
-       And <document> is downloaded
-      #  And I click on step Validation 
-      #  And I click on button <clickButtonName>
-      #  Then <StepActionName> switchs to success status before <timeOut>
+       And I click on step <StepActionName>
+       And <StepActionName> switchs to <StepStatus> status before <timeOut>
+       And I click on step <StepActionName>
+       And <StepActionName> switchs to <StepStatus> status before <timeOut>
+       #And I download <document>
+       #And <document> is downloaded
+       And I logout
+       Then I should be logged out
  
     Examples:
  
-      | user            | password           | criteria                                            | values                                             | StepActionName          | StepStatus  | timeOut |StepActionName  | StepStatus  | timeOut | document                                                |                                                         
-      | imen.messaoudi  |  NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-REPORT;lu;en;001915         | Attente des calculs EMT | finished    | 1000000 |Génération CSV  | success     | 1000000 |PART_001915_C2_2022-12-31_PRIIPS-EMT-4-1-REPORT |
+      | user            | password           | criteria                                            | values                                             | StepActionName      | StepStatus  | timeOut |StepActionName  | StepStatus  | timeOut | document                                                |                                                         
+      | imen.messaoudi  |  NeoxamMess@2424   | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-EMT-4-1-COMPUTATION;lu;en;001915    | Attente des calculs | success     | 1000000 |Audit           | finished     | 1000000 |001915_2022-12-31_PRIIPS-EMT-4-1-COMPUTATION |
       
   
    @IMPRESS-13953

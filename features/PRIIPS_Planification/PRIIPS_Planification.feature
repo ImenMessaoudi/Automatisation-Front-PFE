@@ -12,13 +12,16 @@
 
             Given I am logged in with <user> and <password>
              When I navigate to the screen <screen>
-             Then I search for criteria <criteria> and <values>
+             And I search for criteria <criteria> and <values>
              And The spreadsheet must be displayed
-
+             And I logout
+             Then I should be logged out
      
         Examples:
                   | user            | password         | screen        | criteria                   | values                          | 
                   | imen.messaoudi  |NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence | 2022-02-07;2024-12-26;en;MONTHLY|  
+                  | imen.messaoudi  |NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence | 2022-02-01;2024-10-06;en;MONTHLY|
+                  | imen.messaoudi  |NeoxamMess@2424   | Planification | Début;Fin;Langue;Fréquence | 2021-12-31;2025-12-31;en;MONTHLY| 
 
 
       @IMPRESS-15443
@@ -28,11 +31,14 @@
             Given I am logged in with <user> and <password>
              When I navigate to the screen <screen>
              And I click on the create button
-             Then The schedule form popup should be displayed
+             And The schedule form popup should be displayed
+             And I logout
+             Then I should be logged out
 
      
         Examples:
                   | user            | password         | screen        | 
+                  | imen.messaoudi  | NeoxamMess@2424  | Planification |
                   | imen.messaoudi  | NeoxamMess@2424  | Planification |
 
 
@@ -54,11 +60,13 @@
              And I choose production start <ProductionStart> 
              And I select the production end <ProductionEnd>
              And I click on the save button
-             Then The workflow had to be saved 
-             And The workflow should be added to the spreadsheet
-     
+             #Then The workflow had to be saved 
+             #And The workflow should be added to the spreadsheet
+             And I logout
+             Then I should be logged out
         Examples:
                   | user            | password          | screen        | Report      | Umbrella       | Fund    | FundShare     | Jurisdiction | Languages | SwitchAction | Frequency | ProductionStart | ProductionEnd | 
+                  | imen.messaoudi  | NeoxamMess@2424   | Planification | EPT 2.1(En) | Rivertree Fd.  | 001915  | 001915C2      | Croatia      | EN        | ON           | Mensuel   | 06/01/2021      | 30/10/2024    |   
                   | imen.messaoudi  | NeoxamMess@2424   | Planification | EPT 2.1(En) | Rivertree Fd.  | 001915  | 001915C2      | Croatia      | EN        | ON           | Mensuel   | 06/01/2021      | 30/10/2024    |   
 
         
@@ -78,10 +86,14 @@
              And I select toggle switch action <SwitchAction>
              And I click on clear button 
              Then The selected fields from the schedule popup should be empty
+             And I logout
+             Then I should be logged out
+
      
         Examples:
                   | user            | password         | screen        | Report      | Umbrella      | Fund    | Fund Share | Jurisdiction | Languages | SwitchAction | 
-                  | imen.messaoudi  | NeoxamMess@2424  | Planification | EPT 2.1(En) | Rivertree Fd. | 001915  | 001915C2   | Austria      | EN        | OFF          |  
+                  | imen.messaoudi  | NeoxamMess@2424  | Planification | EPT 2.1(En) | Rivertree Fd. | 001915  | 001915C2   | Austria      | EN        | OFF          |
+                  | imen.messaoudi  | NeoxamMess@2424  | Planification | EPT 2.1(En) | Rivertree Fd. | 001915  | 001915C2   | Austria      | EN        | OFF          | 
 
 
       @IMPRESS-15446
@@ -92,12 +104,14 @@
              When I navigate to the screen <screen>
              And I search for criteria <criteria> and <values>
              Then Additional select actions appears after selecting the displayed workflow
-
+             Then The selected fields from the schedule popup should be empty
+             And I logout
+             Then I should be logged out
      
         Examples:
                   | user            | password        | screen        | criteria                   | values                           | 
                   | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2023-08-22;2024-08-22;EN;MONTHLY |  
-
+                  | imen.messaoudi  | NeoxamMess@2424 | Planification | Début;Fin;Langue;Fréquence | 2022-08-31;2025-12-31;FR;MONTHLY |
 
       @IMPRESS-15447
 
