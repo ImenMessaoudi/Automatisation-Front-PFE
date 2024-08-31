@@ -23,10 +23,11 @@
     "lint": "eslint .",
     "build": "npm run lint && npm run build:prod",
     "build:prod": "webpack --mode production",
-    "test:mocha": "mocha test/"
+    "test:mocha": "mocha test/",
+    "tests": "npx cucumber-js",
+    "reports": "node ./reports/reporter.js"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^8.10.0",
     "axios": "^1.6.7",
     "chai": "^4.2.0",
     "chai-arrays": "^2.2.0",
@@ -54,6 +55,8 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
+    "cucumber-html-reporter": "^7.1.1",
     "eslint": "^9.6.0",
     "jsdoc": "^3.6.6",
     "mocha": "^10.7.0",
