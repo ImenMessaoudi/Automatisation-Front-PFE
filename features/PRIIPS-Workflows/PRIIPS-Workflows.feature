@@ -171,15 +171,18 @@ Feature: PRIIPS_Workflows
             When I click on button <buttonName>
             Then <StepActionName> switchs to <StepStatus> status before <timeOut>
             And I verifiy that <steps> status is <OtherStepStatus> before <timeOut>
+            #And I click on step PDF
+            #And I download <document>
+            #And <document> is downloaded
             #And Auditeur switchs to <StepActionStatus> status before <timeOut>
             And I logout
             Then I should be logged out
    
   
         Examples:
-                  | user           | password | criteria                                                   | values                                 | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut  | steps        | OtherStepStatus |
-                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-KID-REPORT;LU;fr;001915 | Edition        | wait validation  | Accepter   | finished    | 1000000 | Pdf;Docx     | success;success |
-                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-KID-REPORT;LU;fr;001915 | Edition        | wait validation  | Accepter   | finished    | 1000000 | Pdf;Docx     | success;success | 
+                  | user           | password | criteria                                                   | values                                 | StepActionName | StepActionStatus | buttonName | StepStatus | timeOut  | steps    | OtherStepStatus |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-KID-REPORT;LU;fr;001915 | Edition        | wait validation  | Accepter   | success    | 1000000 | Pdf;Docx     | success;success |
+                  | imen.messaoudi | NeoxamMess@2424 | Mois d'arrêté;Document;Juridiction;Langue;Code Ptf. | 2022-12;PRIIPS-KID-REPORT;LU;fr;001915 | Edition        | wait validation  | Accepter   | success    | 1000000 | Pdf;Docx     | success ;success| 
 
   @IMPRESS-13959
  

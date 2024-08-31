@@ -1,4 +1,4 @@
 
 module.exports = {
-    default: '--publish-quiet'
-  };
+  default: `--format json:./reports/cucumber-report.json`
+};

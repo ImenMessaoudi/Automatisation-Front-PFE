@@ -18,7 +18,7 @@ Before(async function (scenario) {
 
 
   
-  //let path = "https://irepptnr-001915-2023-02-21-tst.bams.corp/impress/#/"
+  
   let path = "https://refprod-priips-test.bams.corp/impress/#/"
   await page.goto(path)
   await page.waitForNavigation({ waitUntil: "load", timeout: 60000 });
